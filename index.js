@@ -1,5 +1,5 @@
-var Scraper = require('./Scraper');
+var Scraper = require('./OWScraper');
 
-Scraper.getFeaturedStats('ForbiddenX#1223').then((stats) => {
+Scraper.getFeaturedStats('ForbiddenX#1223', true).then((stats) => {
 	console.log(stats)
 });

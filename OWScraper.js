@@ -24,13 +24,13 @@ class OWScraper {
 		let stats = {};
 
 		keys.map((key, i) => {
-			stats[key] = $(`#${type} .highlights-section ul.row li:nth-child(${i+1}) .card-heading`).text();
+			stats[key] = $(`#${type}-play .highlights-section ul.row li:nth-child(${i+1}) .card-heading`).text();
 		});
 
 		return stats;
 	}
 
-	getFeaturedStats(name, type) {
+	getFeaturedStats(name, competitive) {
 		var profile = {};
 		return new Promise((resolve, reject) => {
 			this._searchByName(name).then((data) => {
@@ -43,7 +43,7 @@ class OWScraper {
 					}
 
 					let $ = cheerio.load(body);
-					profile.featuredStats = this._parseFeaturedStats($, 'quick-play', ['eliminations', 'damageDone', 'deaths', 'finalBlows', 'healingDone', 'objectiveKills', 'objectiveTime', 'soloKills']);
+					profile.featuredStats = this._parseFeaturedStats($, competitive ? 'competitive' : 'quick', ['eliminations', 'damageDone', 'deaths', 'finalBlows', 'healingDone', 'objectiveKills', 'objectiveTime', 'soloKills']);
 					resolve(profile);
 				})
 			})
